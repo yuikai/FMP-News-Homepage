@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | News homepage</title>
+
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="./styles.css"/>
+</head>
+<body>
+  <div id="app">
+
+    <!-- Menu section start -->
+    <img id="menu-button"
+      v-show="!defaultMenu"
+      @click="toggleMenu"
+      :src="menuIcon"
+      alt="Toggle Menu"/>
+    <span v-show="defaultMenu || showMenu" id="menu-container">
+      <div @click="scrollToTop">Home</div>
+      <div @click="scrollToNew">New</div>
+      <div @click="scrollToPopular">Popular</div>
+      <div>Trending</div>
+      <div>Categories</div>
+    </span>
+    <!-- Menu section end -->
+
+    <img id="logo" src="./assets/images/logo.svg" alt="Website Logo"/>
+
+    <div id="container">
+      <div id="headline">
+        <img :src="headline.image"/>
+        <h1>{{ headline.title }}</h1>
+        <p>{{ headline.desc }}</p>
+        <button>READ MORE</button>
+      </div>
+      <div id="new">
+        <h2>New</h2>
+        <ul>
+          <div v-for="article in newArticles">
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.desc }}</p>
+          </div>
+        </ul>
+      </div>
+      <div id="popular">
+        <popular :style="{ 'grid-column':index + 1 }"
+          v-for="(article, index) in popularArticles"
+          :key="index"
+          :index="index"
+          :content="article">
+        </popular>
+      </div>
+    </div>
+  </div>
+  
+  <br/> 
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">uKai</a>.
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
